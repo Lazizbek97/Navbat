@@ -15,8 +15,9 @@ class MyAccount extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: getWidth(60),
-                backgroundImage:
-                    const NetworkImage("https://source.unsplash.com/random"),
+                backgroundColor: Colors.transparent,
+                backgroundImage: const NetworkImage(
+                    "https://chpic.su/_data/stickers/m/MemojiiOS13/MemojiiOS13_005.webp"),
               ),
               Text(
                 "Lazizbek Fayziev",

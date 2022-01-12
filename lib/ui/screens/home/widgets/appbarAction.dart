@@ -16,8 +16,11 @@ class _AppbarActionState extends State<AppbarAction> {
       padding: EdgeInsets.only(right: getWidth(15.0)),
       child: InkWell(
         onTap: () {},
-        child: const CircleAvatar(
-          backgroundImage: NetworkImage("https://source.unsplash.com/random"),
+        child: CircleAvatar(
+          radius: getWidth(25),
+          backgroundColor: Colors.transparent,
+          backgroundImage: const NetworkImage(
+              "https://chpic.su/_data/stickers/m/MemojiiOS13/MemojiiOS13_005.webp"),
         ),
       ),
     );

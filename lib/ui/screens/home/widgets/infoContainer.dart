@@ -25,17 +25,19 @@ class InfoContainer extends StatelessWidget {
           width: double.infinity,
           height: getHeight(150),
           child: Image.network(
-            "https://source.unsplash.com/random",
-            fit: BoxFit.cover,
+            "https://media.istockphoto.com/vectors/people-crowd-in-queue-line-standing-and-waiting-vector-flat-isolated-vector-id1279604834?k=20&m=1279604834&s=170667a&w=0&h=y7JGR8gnmckSJgJkJ3cTGyJZH2cON07cANlYe2wubMk=",
+            fit: BoxFit.fitWidth,
           ),
         ),
         Padding(
           padding: EdgeInsets.symmetric(
-              horizontal: getHeight(30.0), vertical: getHeight(10)),
+              horizontal: getHeight(30.0), vertical: getHeight(5)),
           child: Text(
             "No Need to wait in pandemic. Book your Virtuel Slot right now!",
-            style:
-                TextStyle(height: getHeight(2.0), fontWeight: FontWeight.bold),
+            style: TextStyle(
+                height: getHeight(1.5),
+                fontWeight: FontWeight.bold,
+                fontSize: 18.0),
           ),
         ),
         SearchForm(formKey: _formKey, textController: _textController),
