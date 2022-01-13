@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minicraft/data/data.dart';
 import 'package:minicraft/sizeConfig.dart';
 
 class MyAccount extends StatelessWidget {
@@ -20,11 +21,11 @@ class MyAccount extends StatelessWidget {
                     "https://chpic.su/_data/stickers/m/MemojiiOS13/MemojiiOS13_005.webp"),
               ),
               Text(
-                "Lazizbek Fayziev",
+                userData['name'],
                 style: TextStyle(
                     fontSize: getWidth(25.0), fontWeight: FontWeight.bold),
               ),
-              const Text("+998993727054")
+              Text(userData['number'])
             ],
           ),
         ),

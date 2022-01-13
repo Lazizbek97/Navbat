@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:minicraft/data/data.dart';
 import 'package:minicraft/sizeConfig.dart';
-import 'package:minicraft/ui/screens/home/myHomePage.dart';
 import 'package:minicraft/ui/screens/myBookings/widgets/bookedList.dart';
 import 'package:minicraft/ui/screens/myBookings/widgets/bookedMenu.dart';
 
@@ -51,17 +51,20 @@ class _MyAllBookingsState extends State<MyAllBookings> {
         ),
         SliverList(
           delegate: SliverChildBuilderDelegate((context, index) {
-            return const BookedList();
-          }, childCount: 2),
+            return BookedList(
+              name: reserved[index].name,
+              pic: reserved[index].pic,
+            );
+          }, childCount: reserved.length),
         ),
         BookedMenu(
           bookedMenuTitle: "Previous Bookings",
         ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate((context, index) {
-            return const BookedList();
-          }, childCount: 2),
-        ),
+        // SliverList(
+        //   delegate: SliverChildBuilderDelegate((context, index) {
+        //     return const BookedList();
+        //   }, childCount: 2),
+        // ),
       ],
     );
   }

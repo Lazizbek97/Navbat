@@ -11,7 +11,7 @@ class LeadingWidget extends StatelessWidget {
       children: [
         IconButton(
           onPressed: () {
-            Navigator.pushReplacementNamed(context, "/");
+            Navigator.pushReplacementNamed(context, "/home");
           },
           icon: const Icon(Icons.keyboard_arrow_left_sharp),
         ),

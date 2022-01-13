@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:minicraft/data/data.dart';
 import 'package:minicraft/sizeConfig.dart';
-import 'package:minicraft/ui/screens/signUp/widgets/elButton.dart';
 import 'package:minicraft/ui/screens/signUp/widgets/inputField.dart';
 import 'package:minicraft/ui/screens/signUp/widgets/socialLinks.dart';
 
@@ -12,9 +12,18 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  final myController = TextEditingController();
+  final myControllerName = TextEditingController();
+  final myControllerUsername = TextEditingController();
+  final myControllerEmail = TextEditingController();
+  final myControllerNumber = TextEditingController();
+  final myControllerPassword = TextEditingController();
 
   bool _ischecked = false;
+  bool isErrorName = false;
+  bool isErrorUsername = false;
+  bool isErrorNumber = false;
+  bool isErrorEmail = false;
+  bool isErrorPassword = false;
 
   @override
   Widget build(BuildContext context) {
@@ -38,24 +47,29 @@ class _SignUpState extends State<SignUp> {
                 style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
               ),
               InputField(
-                myController: myController,
+                myController: myControllerName,
                 hintText: "Full Name",
+                isValidated: isErrorName,
               ),
               InputField(
-                myController: myController,
+                myController: myControllerUsername,
                 hintText: "Username",
+                isValidated: isErrorUsername,
               ),
               InputField(
-                myController: myController,
+                myController: myControllerNumber,
                 hintText: "Phone Number",
+                isValidated: isErrorNumber,
               ),
               InputField(
-                myController: myController,
+                myController: myControllerEmail,
                 hintText: "Email",
+                isValidated: isErrorEmail,
               ),
               InputField(
-                myController: myController,
+                myController: myControllerPassword,
                 hintText: "Password",
+                isValidated: isErrorPassword,
               ),
               Row(
                 children: [
@@ -112,9 +126,57 @@ class _SignUpState extends State<SignUp> {
                       child: const Text("Sign In"))
                 ],
               ),
-              ElButton(
-                isAccepted: _ischecked,
-                buttonName: "Sign Up",
+              ElevatedButton(
+                onPressed: _ischecked
+                    ? () {
+                        setState(() {
+                          myControllerName.text.isEmpty
+                              ? isErrorName = true
+                              : isErrorName = false;
+                          myControllerUsername.text.isEmpty
+                              ? isErrorUsername = true
+                              : isErrorUsername = false;
+                          myControllerNumber.text.isEmpty
+                              ? isErrorNumber = true
+                              : isErrorNumber = false;
+                          myControllerPassword.text.isEmpty
+                              ? isErrorPassword = true
+                              : isErrorPassword = false;
+                          myControllerEmail.text.isEmpty
+                              ? isErrorEmail = true
+                              : isErrorEmail = false;
+                        });
+                        if (!(isErrorEmail ||
+                            isErrorName ||
+                            isErrorNumber ||
+                            isErrorUsername ||
+                            isErrorPassword)) {
+                          userData['name'] = myControllerName.text;
+                          userData['username'] = myControllerUsername.text;
+                          userData['number'] = myControllerNumber.text;
+                          userData['email'] = myControllerEmail.text;
+                          userData['password'] = myControllerPassword.text;
+
+                          users.add(userData);
+
+                          Navigator.pushReplacementNamed(context, "/mainMenu");
+                        }
+                      }
+                    : null,
+                onLongPress: _ischecked ? () {} : null,
+                child: Text("Sign Up"),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue.shade300,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                      getWidth(15),
+                    ),
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: getWidth(150),
+                    vertical: getWidth(20),
+                  ),
+                ),
               ),
             ],
           ),

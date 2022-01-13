@@ -5,7 +5,14 @@ import '../../../../sizeConfig.dart';
 class CompName extends StatelessWidget {
   const CompName({
     Key? key,
+    required this.name,
+    required this.location,
+    required this.pic,
   }) : super(key: key);
+
+  final String name;
+  final String location;
+  final String pic;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +28,9 @@ class CompName extends StatelessWidget {
               margin: EdgeInsets.only(right: getWidth(30)),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15.0),
-                image: const DecorationImage(
+                image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: NetworkImage("https://source.unsplash.com/random"),
+                  image: NetworkImage(pic),
                 ),
               ),
             ),
@@ -31,14 +38,14 @@ class CompName extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Med Pharma",
+                  name,
                   style: TextStyle(
                     color: Colors.grey.shade700,
                     fontWeight: FontWeight.bold,
                     fontSize: 16.0,
                   ),
                 ),
-                const Text("Medical Store | Chilonzor"),
+                Text("Medical Store | $location"),
               ],
             )
           ],

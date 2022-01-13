@@ -6,7 +6,7 @@ import 'package:minicraft/ui/screens/home/widgets/appbarAction.dart';
 import 'package:minicraft/ui/screens/generalWidgets/myAppBar.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -30,7 +30,10 @@ class _HomePageState extends State<HomePage> {
         leading: const AppbarLeading(),
         action: AppbarAction(),
       ),
-      body: MyHomePage(formKey: _formKey, textController: _textController),
+      body: MyHomePage(
+        formKey: _formKey,
+        textController: _textController,
+      ),
     );
   }
 }

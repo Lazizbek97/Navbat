@@ -6,7 +6,18 @@ import 'package:minicraft/ui/screens/bookNow/widgets/infoDetials.dart';
 import '../../../sizeConfig.dart';
 
 class BookNow extends StatelessWidget {
-  const BookNow({Key? key}) : super(key: key);
+  const BookNow({
+    Key? key,
+    required this.name,
+    required this.location,
+    required this.pic,
+    required this.tel,
+  }) : super(key: key);
+
+  final String name;
+  final String location;
+  final String pic;
+  final String tel;
 
   @override
   Widget build(BuildContext context) {
@@ -17,18 +28,21 @@ class BookNow extends StatelessWidget {
             alignment: const Alignment(-0.9, -0.8),
             height: getHeight(350),
             width: double.infinity,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(
-                      "https://www.ihf-fih.org/wordpress/wp-content/uploads/2020/12/Daegu-Hospital.jpg")),
+            decoration: BoxDecoration(
+              image:
+                  DecorationImage(fit: BoxFit.cover, image: NetworkImage(pic)),
             ),
             child: const backButton(),
           ),
-          const InfoDetails()
+          InfoDetails(
+            name: name,
+          )
         ],
       ),
-      floatingActionButton: const FloatingButton(),
+      floatingActionButton: FloatingButton(
+        name: name,
+        pic: pic,
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }

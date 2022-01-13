@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:minicraft/ui/screens/signUp/widgets/elButton.dart';
+import 'package:minicraft/data/data.dart';
 import 'package:minicraft/ui/screens/signUp/widgets/inputField.dart';
 import 'package:minicraft/ui/screens/signUp/widgets/socialLinks.dart';
 
 import '../../../sizeConfig.dart';
 
-class SignIn extends StatelessWidget {
+class SignIn extends StatefulWidget {
   SignIn({Key? key}) : super(key: key);
-  final _controller = TextEditingController();
+
+  @override
+  State<SignIn> createState() => _SignInState();
+}
+
+class _SignInState extends State<SignIn> {
+  final _controllerUsername = TextEditingController();
+
+  final _controllerPassword = TextEditingController();
+
+  bool isErrorUserName = false;
+
+  bool isErrorUserPassword = false;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +39,7 @@ class SignIn extends StatelessWidget {
               child: Image.asset("assets/images/singIn.png"),
             ),
             SizedBox(
-              height: getHeight(380),
+              height: getHeight(385),
               child: Container(
                 margin: EdgeInsets.symmetric(
                   horizontal: getWidth(20),
@@ -36,8 +48,16 @@ class SignIn extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    InputField(myController: _controller, hintText: "Username"),
-                    InputField(myController: _controller, hintText: "Password"),
+                    InputField(
+                      myController: _controllerUsername,
+                      hintText: "Username",
+                      isValidated: isErrorUserName,
+                    ),
+                    InputField(
+                      myController: _controllerPassword,
+                      hintText: "Password",
+                      isValidated: isErrorUserPassword,
+                    ),
                     const Text("Or register with"),
                     const SocialLinks(),
                     Row(
@@ -52,9 +72,53 @@ class SignIn extends StatelessWidget {
                             child: const Text("Sign Up"))
                       ],
                     ),
-                    ElButton(
-                      isAccepted: true,
-                      buttonName: "Sign In",
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          _controllerUsername.text.isEmpty
+                              ? isErrorUserName = true
+                              : isErrorUserName = false;
+                          _controllerPassword.text.isEmpty
+                              ? isErrorUserPassword = true
+                              : isErrorUserPassword = false;
+                        });
+                        if (!(isErrorUserName || isErrorUserPassword)) {
+                          // ignore: unused_local_variable
+                          try {
+                            for (var element in users) {
+                              // ignore: unrelated_type_equality_checks
+                              if (_controllerUsername.text ==
+                                      element['username'] &&
+                                  _controllerPassword.text ==
+                                      element['password']) {
+                                // print((users as User).name);
+                                Navigator.pushReplacementNamed(
+                                    context, "/mainMenu");
+                              } else {
+                                setState(() {
+                                  isErrorUserName = true;
+                                  isErrorUserPassword = true;
+                                });
+                              }
+                            }
+                          } catch (e) {
+                            print("Xatoooooo");
+                          }
+                        }
+                      },
+                      child: const Text("Sign In"),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.blue.shade300,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                            getWidth(15),
+                          ),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: getWidth(150),
+                          vertical: getWidth(20),
+                        ),
+                      ),
                     ),
                   ],
                 ),

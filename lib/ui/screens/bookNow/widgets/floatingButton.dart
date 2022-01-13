@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:minicraft/data/data.dart';
 
 import '../../../../sizeConfig.dart';
 
 class FloatingButton extends StatelessWidget {
-  const FloatingButton({
+  FloatingButton({
     Key? key,
+    required this.name,
+    required this.pic,
   }) : super(key: key);
-
+  String name;
+  String pic;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -24,7 +28,12 @@ class FloatingButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(getWidth(15)),
           ),
           onPressed: () {
-            Navigator.pushNamed(context, "/myTicket");
+            reserved.add(Ticket(name, pic));
+            Navigator.pushNamed(
+              context,
+              "/myTicket",
+              arguments: Ticket(name, pic),
+            );
           },
           child: const Text("Book Queue Now"),
         ),

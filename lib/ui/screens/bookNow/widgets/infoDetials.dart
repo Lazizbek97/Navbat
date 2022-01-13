@@ -6,7 +6,10 @@ import '../../../../sizeConfig.dart';
 class InfoDetails extends StatelessWidget {
   const InfoDetails({
     Key? key,
+    required this.name,
   }) : super(key: key);
+
+  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,7 @@ class InfoDetails extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(vertical: getHeight(15)),
             child: Text(
-              "Goo International Hospital",
+              name,
               style: TextStyle(
                 fontSize: getWidth(25),
                 fontWeight: FontWeight.bold,

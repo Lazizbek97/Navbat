@@ -12,13 +12,16 @@ class SocialLinks extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        CircleAvatar(
-          radius: getWidth(30),
-          child: const Text(
-            "G+",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20.0,
+        InkWell(
+          onTap: () => Navigator.pushNamed(context, "/mainMenu"),
+          child: CircleAvatar(
+            radius: getWidth(30),
+            child: const Text(
+              "G+",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0,
+              ),
             ),
           ),
         ),

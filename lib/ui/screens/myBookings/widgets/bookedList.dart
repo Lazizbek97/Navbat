@@ -4,9 +4,14 @@ import 'package:minicraft/ui/screens/ticketWithQR/ticketBottomSheet.dart';
 import '../../../../sizeConfig.dart';
 
 class BookedList extends StatelessWidget {
-  const BookedList({
+  BookedList({
     Key? key,
+    required this.name,
+    required this.pic,
   }) : super(key: key);
+
+  String name;
+  String pic;
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +34,9 @@ class BookedList extends StatelessWidget {
                     margin: EdgeInsets.only(right: getWidth(30)),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15.0),
-                      image: const DecorationImage(
+                      image: DecorationImage(
                         fit: BoxFit.cover,
-                        image:
-                            NetworkImage("https://source.unsplash.com/random"),
+                        image: NetworkImage(pic),
                       ),
                     ),
                   ),
@@ -41,7 +45,7 @@ class BookedList extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        "Med Pharma",
+                        name,
                         style: TextStyle(
                           color: Colors.grey.shade700,
                           fontWeight: FontWeight.bold,

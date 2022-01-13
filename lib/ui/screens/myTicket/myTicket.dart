@@ -3,10 +3,16 @@ import 'package:minicraft/sizeConfig.dart';
 import 'package:minicraft/ui/screens/bookNow/widgets/backButton.dart';
 import 'package:minicraft/ui/screens/myTicket/widgets/qrCode.dart';
 import 'package:minicraft/ui/screens/myTicket/widgets/ticketNumer.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 
 class MyTicket extends StatefulWidget {
-  const MyTicket({Key? key}) : super(key: key);
-
+  MyTicket({
+    Key? key,
+    required this.name,
+    required this.pic,
+  }) : super(key: key);
+  String name;
+  String pic;
   @override
   State<MyTicket> createState() => _MyTicketState();
 }
@@ -36,7 +42,19 @@ class _MyTicketState extends State<MyTicket>
         actions: [
           IconButton(
             iconSize: getWidth(30),
-            onPressed: () {},
+            onPressed: () {
+              AwesomeDialog(
+                context: context,
+                dialogType: DialogType.QUESTION,
+                title: "Do you want to cancel?",
+                desc: "Click Ok button to cancel your reservation",
+                btnOkOnPress: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, "/mainMenu", (route) => false);
+                },
+                btnCancelOnPress: () {},
+              ).show();
+            },
             icon: const Icon(
               Icons.delete_outline,
               color: Colors.red,
@@ -63,10 +81,10 @@ class _MyTicketState extends State<MyTicket>
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
-                      image: const DecorationImage(
+                      image: DecorationImage(
                         fit: BoxFit.cover,
                         image: NetworkImage(
-                          "https://www.ihf-fih.org/wordpress/wp-content/uploads/2020/12/Daegu-Hospital.jpg",
+                          widget.pic,
                         ),
                       ),
                     ),
@@ -74,7 +92,7 @@ class _MyTicketState extends State<MyTicket>
                     width: double.infinity,
                   ),
                   Text(
-                    "Goo International Hospital",
+                    widget.name,
                     style: TextStyle(
                       fontSize: getWidth(22),
                       fontWeight: FontWeight.bold,

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:minicraft/data/data.dart';
 
 import '../../../../sizeConfig.dart';
 
 class EachCompany extends StatelessWidget {
   int index;
-  EachCompany({Key? key, required this.index}) : super(key: key);
+  Map dataMap;
+  EachCompany({Key? key, required this.index, required this.dataMap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,7 @@ class EachCompany extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.cover,
-              image: NetworkImage("https://source.unsplash.com/random/$index"),
+              image: NetworkImage("${dataMap['pic']}"),
             ),
             borderRadius: BorderRadius.circular(15.0),
           ),
@@ -31,9 +34,9 @@ class EachCompany extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text("Med Pharma"),
-              Text("Mirobod"),
+            children: [
+              Text("${dataMap['name']}"),
+              Text("${dataMap['location']}"),
             ],
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minicraft/data/data.dart';
 import 'package:minicraft/sizeConfig.dart';
 import 'package:minicraft/ui/screens/about/widgets/actionWidget.dart';
 import 'package:minicraft/ui/screens/about/widgets/comments.dart';
@@ -10,13 +11,27 @@ import 'package:minicraft/ui/screens/about/widgets/location.dart';
 import 'package:minicraft/ui/screens/generalWidgets/myAppBar.dart';
 
 class AboutComp extends StatefulWidget {
-  const AboutComp({Key? key}) : super(key: key);
+  const AboutComp({
+    Key? key,
+    required this.name,
+    required this.location,
+    required this.pic,
+    required this.tel,
+  }) : super(key: key);
 
   static int controllerIndex = 0;
+  final String name;
+  final String location;
+  final String pic;
+  final String tel;
+
+  // final ScreenArguments arguments;
 
   @override
   State<AboutComp> createState() => _AboutCompState();
 }
+
+class ScreenArguments {}
 
 int menuIndex = 0;
 PageController _controller = PageController(initialPage: 0, keepPage: false);
@@ -38,10 +53,17 @@ class _AboutCompState extends State<AboutComp> {
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  CompName(),
-                  DetailedInfo(),
-                  Divider(),
+                children: [
+                  CompName(
+                    location: widget.location,
+                    name: widget.name,
+                    pic: widget.pic,
+                  ),
+                  DetailedInfo(
+                    location: widget.location,
+                    tel: widget.tel,
+                  ),
+                  const Divider(),
                 ],
               ),
             ),
@@ -80,7 +102,9 @@ class _AboutCompState extends State<AboutComp> {
       floatingActionButton: FloatingActionButton.extended(
         extendedPadding: EdgeInsets.symmetric(horizontal: getWidth(100)),
         onPressed: () {
-          Navigator.pushNamed(context, "/bookNow");
+          Navigator.pushNamed(context, "/bookNow",
+              arguments: AboutCompany(
+                  widget.name, widget.location, widget.pic, widget.tel));
         },
         label: const Text("Book a Slot"),
         icon: const Icon(Icons.add_box_outlined),

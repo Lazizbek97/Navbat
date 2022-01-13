@@ -12,7 +12,7 @@ import 'package:minicraft/ui/screens/signUp/widgets/inputField.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class MainMenu extends StatefulWidget {
-  MainMenu({Key? key}) : super(key: key);
+  const MainMenu({Key? key}) : super(key: key);
 
   @override
   State<MainMenu> createState() => _MainMenuState();
@@ -20,30 +20,6 @@ class MainMenu extends StatefulWidget {
 
 class _MainMenuState extends State<MainMenu> {
   final _textControllor = TextEditingController();
-
-  final List _names = [
-    "Health",
-    "Repair Shops",
-    "Car Wash",
-    "Beauty",
-    "Food",
-    "Public Service",
-    "Car Rental",
-    "Hotels",
-    "Taxi"
-  ];
-
-  final List _icons = [
-    Icons.health_and_safety_outlined,
-    Icons.handyman_outlined,
-    Icons.local_car_wash_outlined,
-    Icons.content_cut_outlined,
-    Icons.food_bank_outlined,
-    Icons.supervisor_account_rounded,
-    Icons.car_rental,
-    Icons.hotel_outlined,
-    Icons.local_taxi_outlined,
-  ];
 
   int _pageIndex = 0;
 
@@ -57,8 +33,7 @@ class _MainMenuState extends State<MainMenu> {
     SizeConfig().init(context);
     List _pages = [
       // MyHomePage(formKey: _formKey, textController: _textController),
-      MainMenuPage(
-          textControllor: _textControllor, icons: _icons, names: _names),
+      MainMenuPage(textControllor: _textControllor),
       const MyAllBookings(),
       const MyAccount(),
     ];
@@ -112,16 +87,10 @@ class MainMenuPage extends StatelessWidget {
   const MainMenuPage({
     Key? key,
     required TextEditingController textControllor,
-    required List icons,
-    required List names,
   })  : _textControllor = textControllor,
-        _icons = icons,
-        _names = names,
         super(key: key);
 
   final TextEditingController _textControllor;
-  final List _icons;
-  final List _names;
 
   @override
   Widget build(BuildContext context) {
@@ -142,8 +111,8 @@ class MainMenuPage extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
-                    Text(
+                  children: [
+                    const Text(
                       "Good Morning",
                       style: TextStyle(
                           color: Colors.black,
@@ -151,8 +120,8 @@ class MainMenuPage extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "Lazizbek Fayziev",
-                      style: TextStyle(
+                      userData['name'],
+                      style: const TextStyle(
                           color: Colors.black,
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold),
@@ -180,7 +149,10 @@ class MainMenuPage extends StatelessWidget {
               horizontal: getWidth(20), vertical: getHeight(10)),
           sliver: SliverToBoxAdapter(
             child: InputField(
-                myController: _textControllor, hintText: "Search the Merchant"),
+              myController: _textControllor,
+              hintText: "Search the Merchant",
+              isValidated: false,
+            ),
           ),
         ),
         SliverPadding(
@@ -227,6 +199,7 @@ class MainMenuPage extends StatelessWidget {
             delegate: SliverChildBuilderDelegate((context, index) {
               return InkWell(
                 onTap: () {
+                  MyHomePage.indexim = index;
                   Navigator.pushNamed(context, "/home");
                 },
                 child: Container(
@@ -239,12 +212,12 @@ class MainMenuPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Icon(
-                        _icons[index],
+                        menu[index][1],
                         color: Colors.blue.shade300,
                         size: getHeight(50),
                       ),
                       Text(
-                        _names[index],
+                        menu[index][0],
                         style: TextStyle(
                             fontSize: 16.0,
                             fontWeight: FontWeight.bold,

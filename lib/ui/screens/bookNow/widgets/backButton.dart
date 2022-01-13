@@ -12,7 +12,8 @@ class backButton extends StatelessWidget {
     return IconButton(
       iconSize: getWidth(45),
       onPressed: () {
-        Navigator.pop(context);
+        Navigator.pushNamedAndRemoveUntil(
+            context, "/mainMenu", (route) => false);
       },
       icon: CircleAvatar(
         radius: getWidth(30),

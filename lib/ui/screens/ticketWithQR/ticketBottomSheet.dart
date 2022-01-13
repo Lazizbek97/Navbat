@@ -15,7 +15,7 @@ class TicketBottomSheet extends StatelessWidget {
       ),
       child: Column(
         children: [
-          QrCode(),
+          const QrCode(),
           Padding(
             padding: EdgeInsets.only(top: getHeight(30)),
             child: ElevatedButton(
@@ -29,7 +29,9 @@ class TicketBottomSheet extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               child: const Text("Cancek Queue"),
             ),
           )

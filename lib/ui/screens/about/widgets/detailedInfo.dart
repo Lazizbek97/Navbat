@@ -5,7 +5,12 @@ import '../../../../sizeConfig.dart';
 class DetailedInfo extends StatelessWidget {
   const DetailedInfo({
     Key? key,
+    required this.tel,
+    required this.location,
   }) : super(key: key);
+
+  final String tel;
+  final String location;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,7 @@ class DetailedInfo extends StatelessWidget {
                 fontSize: 16.0),
           ),
           Text(
-            "Chilonor tumani, Binokorlar ko'chasi, 23-uy",
+            "$location, Binokorlar ko'chasi, 23-uy",
             style: TextStyle(color: Colors.grey.shade600),
           ),
           SizedBox(
@@ -61,7 +66,7 @@ class DetailedInfo extends StatelessWidget {
                             fontSize: 16.0),
                       ),
                       Text(
-                        "+998993727054",
+                        tel,
                         style: TextStyle(color: Colors.grey.shade600),
                       ),
                     ],
